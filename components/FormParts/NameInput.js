@@ -4,12 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 const NameInput = ({ data, name, setName }) => {
   const [hasError, setHasError] = useState(false);
+  const regex = /[^A-Za-z, ""]/g;
 
   const handleChange = (value) => {
     value.length === data.validation.max
       ? setHasError(true)
       : setHasError(false);
-    setName(value.replace(/[^A-Za-z, ""]/g, ""));
+    setName(value.replace(regex, ""));
+    console.log(hasError, value.length, data.validation.max);
   };
 
   return (

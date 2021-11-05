@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Form from "../components/Form";
 
@@ -9,29 +9,31 @@ const DiagnosticsScreen = (props) => {
   const [selectedLanguage, setSelectedLanguage] = useState();
 
   return (
-    <View>
-      <View style={styles.pickerContainer}>
-        <Text style={styles.title}>Observation</Text>
-        <View style={styles.picker}>
-          <Picker
-            mode="dropdown"
-            selectedValue={selectedLanguage}
-            onValueChange={(value, index) => setSelectedLanguage(value)}
-          >
-            <Picker.Item label="🇺🇸 EN" value="english" />
-            <Picker.Item label="🇷🇺 RU" value="russian" />
-          </Picker>
+    <ScrollView>
+      <View>
+        <View style={styles.pickerContainer}>
+          <Text style={styles.title}>Observation</Text>
+          <View style={styles.picker}>
+            <Picker
+              mode="dropdown"
+              selectedValue={selectedLanguage}
+              onValueChange={(value, index) => setSelectedLanguage(value)}
+            >
+              <Picker.Item label="🇺🇸 EN" value="english" />
+              <Picker.Item label="🇷🇺 RU" value="russian" />
+            </Picker>
+          </View>
         </View>
+        <Form
+          lang={
+            selectedLanguage === "russian"
+              ? data.locales.ru
+              : data.locales["en-us"]
+          }
+          selectedLanguage={selectedLanguage === "russian" ? "ru" : "en"}
+        />
       </View>
-      <Form
-        lang={
-          selectedLanguage === "russian"
-            ? data.locales.ru
-            : data.locales["en-us"]
-        }
-        selectedLanguage={selectedLanguage === "russian" ? "ru" : "en"}
-      />
-    </View>
+    </ScrollView>
   );
 };
 

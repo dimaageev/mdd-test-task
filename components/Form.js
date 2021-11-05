@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import NameInput from "./FormParts/NameInput";
 import DateInput from "./FormParts/DateInput";
 import BloodGroupInput from "./FormParts/BloodGroupInput";
@@ -28,40 +28,38 @@ const Form = (props) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.main}>
-        <NameInput data={nameInputData} name={name} setName={setName} />
+    <View style={styles.main}>
+      <NameInput data={nameInputData} name={name} setName={setName} />
 
-        <DateInput data={dateInputData} date={date} setDate={setDate} />
+      <DateInput data={dateInputData} date={date} setDate={setDate} />
 
-        <BloodGroupInput
-          data={bloodGroupInputData}
-          bloodGroup={bloodGroup}
-          setBloodGroup={setBloodGroup}
-        />
+      <BloodGroupInput
+        data={bloodGroupInputData}
+        bloodGroup={bloodGroup}
+        setBloodGroup={setBloodGroup}
+      />
 
-        <TemperatureInput
-          data={temperatureInputData}
-          temperature={temperature}
-          setTemperature={setTemperature}
-        />
+      <TemperatureInput
+        data={temperatureInputData}
+        temperature={temperature}
+        setTemperature={setTemperature}
+      />
 
-        <HasCovid
-          data={covidInputData}
-          hasCovid={hasCovid}
-          setHasCovid={setHasCovid}
-        />
+      <HasCovid
+        data={covidInputData}
+        hasCovid={hasCovid}
+        setHasCovid={setHasCovid}
+      />
 
-        <Pressable
-          style={styles.button}
-          onPress={() => console.log(diagnosticReport)}
-        >
-          <Text style={styles.text}>
-            {props.selectedLanguage === "en" ? "Save" : "Сохранить"}
-          </Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+      <Pressable
+        style={styles.button}
+        onPress={() => console.log(diagnosticReport)}
+      >
+        <Text style={styles.text}>
+          {props.selectedLanguage === "en" ? "Save" : "Сохранить"}
+        </Text>
+      </Pressable>
+    </View>
   );
 };
 

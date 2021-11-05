@@ -3,12 +3,13 @@ import { Text, View, StyleSheet, TextInput } from "react-native";
 
 const TemperatureInput = ({ data, temperature, setTemperature }) => {
   const [hasError, setHasError] = useState(false);
+  const regex = /[^0-9, "."]/g;
 
   const handleChange = (value) => {
     (value && value < 34) || value > 42
       ? setHasError(true)
       : setHasError(false);
-    setTemperature(value.replace(/[^0-9, "."]/g, ""));
+    setTemperature(value.replace(regex, ""));
   };
 
   return (

@@ -5,7 +5,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 const DateInput = ({ data, date, setDate }) => {
   const [show, setShow] = useState(false);
 
-  const onChange = (selectedDate) => {
+  const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
     setDate(currentDate);
