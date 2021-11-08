@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
+import { useValidator } from "../../validation/validator";
 
-const TemperatureInput = ({ data, temperature, setTemperature }) => {
-  const [hasError, setHasError] = useState(false);
-  const regex = /[^0-9, "."]/g;
+const TemperatureInput = ({ data, type, globalData, setGlobalData }) => {
+  const [hasError, handleChange, name, temperature] = useValidator();
 
-  const handleChange = (value) => {
-    (value && value < 34) || value > 42
-      ? setHasError(true)
-      : setHasError(false);
-    setTemperature(value.replace(regex, ""));
-  };
+  useEffect(() => {
+    setGlobalData({ ...globalData, bodyTemperature: temperature });
+  }, [temperature]);
 
   return (
     <View>
@@ -24,7 +21,7 @@ const TemperatureInput = ({ data, temperature, setTemperature }) => {
         }}
         keyboardType="decimal-pad"
         placeholder={data.tip}
-        onChangeText={handleChange}
+        onChangeText={(value) => handleChange(value, type)}
         value={temperature.toString()}
         maxLength={4}
       />

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Checkbox } from "react-native-paper";
 
-const HasCovid = ({ data, hasCovid, setHasCovid }) => {
+const HasCovid = ({ data, globalData, setGlobalData }) => {
+  const [hasCovid, setHasCovid] = useState(false);
+
+  useEffect(() => {
+    setGlobalData({ ...globalData, hasCovid: hasCovid });
+  }, [hasCovid]);
+
   return (
     <View style={styles.container}>
       <Checkbox

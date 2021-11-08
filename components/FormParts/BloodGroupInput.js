@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-const BloodGroupInput = ({ data, bloodGroup, setBloodGroup }) => {
+const BloodGroupInput = ({ data, globalData, setGlobalData }) => {
+  const [bloodGroup, setBloodGroup] = useState("");
   const bloodGroupPicker = data.options.map((item) => (
     <Picker.Item key={item.id} label={item.label} value={item.id} />
   ));
+
+  useEffect(() => {
+    setGlobalData({ ...globalData, bloodType: bloodGroup });
+  }, [bloodGroup]);
 
   return (
     <View>

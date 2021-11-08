@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useValidator } from "../../validation/validator";
 
-const NameInput = ({ data, name, setName }) => {
-  const [hasError, setHasError] = useState(false);
-  const regex = /[^A-Za-z, ""]/g;
+const NameInput = ({ data, type, globalData, setGlobalData }) => {
+  const [hasError, handleChange, name, temperature] = useValidator();
 
-  const handleChange = (value) => {
-    value.length === data.validation.max
-      ? setHasError(true)
-      : setHasError(false);
-    setName(value.replace(regex, ""));
-    console.log(hasError, value.length, data.validation.max);
-  };
+  useEffect(() => {
+    setGlobalData({ ...globalData, name: name });
+  }, [name]);
 
   return (
     <View>
@@ -32,7 +28,7 @@ const NameInput = ({ data, name, setName }) => {
           borderColor: hasError ? "red" : "black",
         }}
         placeholder={data.tip}
-        onChangeText={handleChange}
+        onChangeText={(value) => handleChange(value, type)}
         value={name}
         maxLength={data.validation.max}
       />

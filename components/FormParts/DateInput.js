@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const DateInput = ({ data, date, setDate }) => {
+const DateInput = ({ data, globalData, setGlobalData }) => {
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setGlobalData({ ...globalData, birthDate: date });
+  }, [date]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;

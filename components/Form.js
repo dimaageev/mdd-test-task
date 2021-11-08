@@ -7,54 +7,49 @@ import TemperatureInput from "./FormParts/TemperatureInput";
 import HasCovid from "./FormParts/HasCovid";
 
 const Form = (props) => {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [bloodGroup, setBloodGroup] = useState("");
-  const [temperature, setTemperature] = useState(0);
-  const [hasCovid, setHasCovid] = useState(false);
-
   let nameInputData = props.lang.fields[0];
   let dateInputData = props.lang.fields[1];
   let bloodGroupInputData = props.lang.fields[2];
   let temperatureInputData = props.lang.fields[3];
   let covidInputData = props.lang.fields[4];
 
-  const diagnosticReport = {
-    name: name,
-    birthDate: date,
-    bloodType: bloodGroup,
-    bodyTemperature: temperature,
-    hasCovid: hasCovid,
-  };
+  const [globalData, setGlobalData] = useState({});
 
   return (
     <View style={styles.main}>
-      <NameInput data={nameInputData} name={name} setName={setName} />
+      <NameInput
+        data={nameInputData}
+        type="name"
+        globalData={globalData}
+        setGlobalData={setGlobalData}
+      />
 
-      <DateInput data={dateInputData} date={date} setDate={setDate} />
+      <DateInput
+        data={dateInputData}
+        globalData={globalData}
+        setGlobalData={setGlobalData}
+      />
 
       <BloodGroupInput
         data={bloodGroupInputData}
-        bloodGroup={bloodGroup}
-        setBloodGroup={setBloodGroup}
+        globalData={globalData}
+        setGlobalData={setGlobalData}
       />
 
       <TemperatureInput
         data={temperatureInputData}
-        temperature={temperature}
-        setTemperature={setTemperature}
+        type="temperature"
+        globalData={globalData}
+        setGlobalData={setGlobalData}
       />
 
       <HasCovid
         data={covidInputData}
-        hasCovid={hasCovid}
-        setHasCovid={setHasCovid}
+        globalData={globalData}
+        setGlobalData={setGlobalData}
       />
 
-      <Pressable
-        style={styles.button}
-        onPress={() => console.log(diagnosticReport)}
-      >
+      <Pressable style={styles.button} onPress={() => console.log(globalData)}>
         <Text style={styles.text}>
           {props.selectedLanguage === "en" ? "Save" : "Сохранить"}
         </Text>
